@@ -72,7 +72,7 @@ read_console (void)
 }
 
 int
-write (int fd, char *buf, int nbytes)
+_write (int fd, char *buf, int nbytes)
 {
   int i;
 
@@ -92,26 +92,26 @@ write (int fd, char *buf, int nbytes)
 }
 
 int
-close (int fd)
+_close (int fd)
 {
   return 0;
 }
 
 int
-fstat (int fd, struct stat*buf)
+_fstat (int fd, struct stat*buf)
 {
   return -1;
 }
 
 off_t
-lseek (int fd, off_t offset, int whence)
+_lseek (int fd, off_t offset, int whence)
 {
   errno = ESPIPE;
   return -1;
 }
 
 int
-read (int fd, char *buf, int count)
+_read (int fd, char *buf, int count)
 {
   int i;
 
@@ -173,7 +173,7 @@ static void *const heap_end = &__heap_end;
 #endif /* defined(__CHERI_PURE_CAPABILITY__) */
 
 void *
-sbrk (int nbytes)
+_sbrk (int nbytes)
 {
   void *base;
 
