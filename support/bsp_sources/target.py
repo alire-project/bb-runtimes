@@ -445,7 +445,7 @@ class Target(TargetConfiguration, ArchSupport):
                     blank
                     + '"-nolibc", '
                     + '"-Wl,--start-group,'
-                    + "-lgnarl,-lgnat,-lc,-lgcc,-lgcc_eh,"
+                    + "-lgnarl,-lgnat,-lc,-lgcc,"
                     + '--end-group",'
                 )
             else:
