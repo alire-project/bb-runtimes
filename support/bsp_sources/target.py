@@ -414,7 +414,7 @@ class Target(TargetConfiguration, ArchSupport):
                     blank
                     + '"-nostartfiles", "-nolibc", '
                     + '"-Wl,--start-group,'
-                    + "-lgnarl,-lgnat,-lc,-lgcc,-lgcc_eh,"
+                    + "-lgnarl,-lgnat,-lc,-lgcc,"
                     + '--end-group",'
                 )
             else:
