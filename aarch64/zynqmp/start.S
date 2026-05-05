@@ -251,6 +251,44 @@ __start_el1:
         mov     x0, #(1 << 20)
         msr     cpacr_el1, x0
 
+        /* Initialize FPU registers.
+           The initialisation is done here to ensure it regardless
+           of the exception level at reset.
+           See ARM DAI 0527A Bare-metal Boot Code for ARMv8-A Processors.
+        */
+        fmov    d0, xzr
+        fmov    d1, xzr
+        fmov    d2, xzr
+        fmov    d3, xzr
+        fmov    d4, xzr
+        fmov    d5, xzr
+        fmov    d6, xzr
+        fmov    d7, xzr
+        fmov    d8, xzr
+        fmov    d9, xzr
+        fmov    d10, xzr
+        fmov    d11, xzr
+        fmov    d12, xzr
+        fmov    d13, xzr
+        fmov    d14, xzr
+        fmov    d15, xzr
+        fmov    d16, xzr
+        fmov    d17, xzr
+        fmov    d18, xzr
+        fmov    d19, xzr
+        fmov    d20, xzr
+        fmov    d21, xzr
+        fmov    d22, xzr
+        fmov    d23, xzr
+        fmov    d24, xzr
+        fmov    d25, xzr
+        fmov    d26, xzr
+        fmov    d27, xzr
+        fmov    d28, xzr
+        fmov    d29, xzr
+        fmov    d30, xzr
+        fmov    d31, xzr
+
         bl      __configure_mmu
 
         # Initialize MMU tables
