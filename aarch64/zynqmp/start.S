@@ -500,7 +500,7 @@ __dcache_level:
         and     x2, x6, #7      // x2 <- log2(cache line size) - 4
         add     x2, x2, #4      // x2 <- log2(cache line size)
         mov     x3, #0x3ff
-        and     x2, x3, x6, lsr #3      // x3 <- max number of ways
+        and     x3, x3, x6, lsr #3      // x3 <- max number of ways
         clz     w5, w3          // bit position of ways
         mov     x4, #0x7fff
         and     x4, x4, x6, lsr #13     // x4 <- max number of sets
