@@ -471,7 +471,7 @@ __dcaches_loop_level:
         and     x12, x12, #7    // x12 <- cache type
         cmp     x12, #2
         b.lt    __dcaches_skip  // skip if no cache or icache
-        bl      __dcache_level  // x1 given as parameter
+        bl      __dcache_level  // x0 and x1 given as parameter
 __dcaches_skip:
         add     x0, x0, #1      // Cache Level += 1
         cmp     x11, x0         // Cache_Level <> LoC
@@ -496,7 +496,7 @@ __dcache_level:
         lsl     x12, x0, #1
         msr     csselr_el1, x12 // select cache level
         isb
-        mrs     x6, ccsidr_el1  // read the new cssidr_el1
+        mrs     x6, ccsidr_el1  // read the new ccsidr_el1
         and     x2, x6, #7      // x2 <- log2(cache line size) - 4
         add     x2, x2, #4      // x2 <- log2(cache line size)
         mov     x3, #0x3ff
@@ -511,8 +511,8 @@ __dcache_loop_way:
         orr     x9, x12, x7     // map way and level to cisw value
         lsl     x7, x4, x2
         orr     x9, x9, x7      // map set number to cisw value
-        tbz     w1, #0, 1f      // invalidate
-        dc      isw, x9
+        tbz     w1, #0, 1f      // w1[0]: 0 -> c & inv, 1 -> inv
+        dc      isw, x9         // invalidate only
         b       2f
 1:      dc      cisw, x9        // clean & invalidate
 2:      subs    x6, x6, #1      // ways := ways - 1
