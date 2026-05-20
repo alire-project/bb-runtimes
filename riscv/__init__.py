@@ -1,4 +1,4 @@
-from support import readfile
+from support import using_llvm_compiler
 from support.bsp_sources.target import DFBBTarget
 
 
@@ -36,7 +36,14 @@ class Spike(RiscV64):
     @property
     def compiler_switches(self):
         # The required compiler switches
-        return ("-mcmodel=medany",)
+        switches = ["-mcmodel=medany"]
+
+        if using_llvm_compiler():
+            # LLVM's default architecture for bareboard targets, rv64imac, isn't
+            # compatible with floating-point instructions in our assembly code.
+            switches.append("-march=rv64gc")
+
+        return tuple(switches)
 
     @property
     def loaders(self):
@@ -86,7 +93,7 @@ class PolarFireSOC(RiscV64):
     @property
     def compiler_switches(self):
         # The required compiler switches
-        return ("-march=rv64gc", "-mabi=lp64d")
+        return ("-march=rv64gc", "-mabi=lp64d", "-mcmodel=medany")
 
     @property
     def system_ads(self):
@@ -372,7 +379,7 @@ class MicroblazeV(RiscV64):
 
     @property
     def compiler_switches(self):
-        return ("-march=rv64ima_zicsr_zifencei_zicbom", "-mabi=lp64")
+        return ("-march=rv64ima_zicsr_zifencei_zicbom", "-mabi=lp64", "-mcmodel=medany")
 
 
 class RV32BASE(RiscV32):
@@ -512,7 +519,7 @@ class RV64IM(RV64BASE):
 
     @property
     def compiler_switches(self):
-        return ("-march=rv64im", "-mabi=lp64")
+        return ("-march=rv64im", "-mabi=lp64", "-mcmodel=medany")
 
 
 class RV64IMC(RV64BASE):
@@ -522,7 +529,7 @@ class RV64IMC(RV64BASE):
 
     @property
     def compiler_switches(self):
-        return ("-march=rv64imc", "-mabi=lp64")
+        return ("-march=rv64imc", "-mabi=lp64", "-mcmodel=medany")
 
 
 class RV64IMAC(RV64BASE):
@@ -532,7 +539,7 @@ class RV64IMAC(RV64BASE):
 
     @property
     def compiler_switches(self):
-        return ("-march=rv64imac", "-mabi=lp64")
+        return ("-march=rv64imac", "-mabi=lp64", "-mcmodel=medany")
 
 
 class RV64IMAFC(RV64BASE):
@@ -546,7 +553,7 @@ class RV64IMAFC(RV64BASE):
 
     @property
     def compiler_switches(self):
-        return ("-march=rv64imafc", "-mabi=lp64f")
+        return ("-march=rv64imafc", "-mabi=lp64f", "-mcmodel=medany")
 
 
 class RV64IMFC(RV64BASE):
@@ -560,7 +567,7 @@ class RV64IMFC(RV64BASE):
 
     @property
     def compiler_switches(self):
-        return ("-march=rv64imfc", "-mabi=lp64f")
+        return ("-march=rv64imfc", "-mabi=lp64f", "-mcmodel=medany")
 
 
 class RV64IMAFDC(RV64BASE):
@@ -578,4 +585,4 @@ class RV64IMAFDC(RV64BASE):
 
     @property
     def compiler_switches(self):
-        return ("-march=rv64imafdc", "-mabi=lp64d")
+        return ("-march=rv64imafdc", "-mabi=lp64d", "-mcmodel=medany")

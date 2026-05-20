@@ -4,7 +4,7 @@
         /* _start_ram */
         /**************/
 
-        .section .start
+        .section .start, "ax"
         .globl _start_ram
         .type _start_rom,@function
 
@@ -48,6 +48,13 @@ _start_ram:
         csrs    mstatus, t0
 #endif
 
+        /* LLVM does not support C++ so we do not activate the code to
+           execute C++ static constructors and destructors. */
+#ifdef __clang__
+        /* Call the main routine */
+        call main
+        call _exit
+#else
         /* Run global constructors */
         call __libc_init_array
 
@@ -64,6 +71,7 @@ _start_ram:
         mv a0, s0
 
         call exit
+#endif
 
 infinite_loop:
         wfi

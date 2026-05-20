@@ -3,7 +3,7 @@
         * at them to define the address and size of HTIF registers.
         */
 
-        .section .host_target_interface
+        .section .host_target_interface, "a"
         .globl tohost
         .size tohost, 8
 tohost:
@@ -19,7 +19,7 @@ fromhost:
         /* _start_ram */
         /**************/
 
-        .section .start
+        .section .start, "ax"
         .globl _start_ram
         .type _start_ram,@function
 
@@ -51,6 +51,13 @@ _start_ram:
         fssr x0              /* Set rounding mode */
 1:
 
+        /* LLVM does not support C++ so we do not activate the code to
+           execute C++ static constructors and destructors. */
+#ifdef __clang__
+        /* Call the main routine */
+        call main
+        call _exit
+#else
         /* Run global constructors */
         call __libc_init_array
 
@@ -67,4 +74,6 @@ _start_ram:
         mv a0, s0
 
         call exit
+#endif
+
 2:      j 2b

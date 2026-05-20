@@ -6,7 +6,7 @@
 
 #include "riscv_def.h"
 
-        .section .start
+        .section .start, "ax"
         .globl _start_ram
         .type _start_ram,@function
 
@@ -138,6 +138,14 @@ _start_ram:
 
     /* Enter Ada Environment: Elaboration and Main procedure */
     /* Note: Elaboration will wake secondary harts via IPIs in Start_All_CPUs */
+
+    /* LLVM does not support C++ so we do not activate the code to
+       execute C++ static constructors and destructors. */
+#ifdef __clang__
+    /* Call the main routine */
+    call main
+    call _exit
+#else
     call __libc_init_array
     call main
 
@@ -150,6 +158,7 @@ _start_ram:
     /* Restore exit status code and exit */
     mv a0, s0
     call exit
+#endif
     /* -- END of MAIN HART PATH -- */
 
 .secondary_hart_wait:
