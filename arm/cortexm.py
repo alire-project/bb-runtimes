@@ -901,46 +901,55 @@ stm32_board_configuration = {
         "STM32_Main_Clock_Frequency": "168_000_000",
         "STM32_HSE_Clock_Frequency": "8_000_000",
         "STM32_FLASH_Latency": "5",
+        "PLLQ_Value": "7",
     },
     "nucleo_f401re": {
         "STM32_Main_Clock_Frequency": "168_000_000",
         "STM32_HSE_Clock_Frequency": "8_000_000",
         "STM32_FLASH_Latency": "5",
+        "PLLQ_Value": "7",
     },
     "feather_stm32f405": {
         "STM32_Main_Clock_Frequency": "168_000_000",
         "STM32_HSE_Clock_Frequency": "12_000_000",
         "STM32_FLASH_Latency": "5",
+        "PLLQ_Value": "7",
     },
     "stm32f429disco": {
         "STM32_Main_Clock_Frequency": "180_000_000",
         "STM32_HSE_Clock_Frequency": "8_000_000",
         "STM32_FLASH_Latency": "5",
+        "PLLQ_Value": "7",
     },
     "openmv2": {
         "STM32_Main_Clock_Frequency": "180_000_000",
         "STM32_HSE_Clock_Frequency": "12_000_000",
         "STM32_FLASH_Latency": "5",
+        "PLLQ_Value": "7",
     },
     "stm32f469disco": {
         "STM32_Main_Clock_Frequency": "180_000_000",
         "STM32_HSE_Clock_Frequency": "8_000_000",
         "STM32_FLASH_Latency": "5",
+        "PLLQ_Value": "7",
     },
     "stm32f746disco": {
-        "STM32_Main_Clock_Frequency": "200_000_000",
+        "STM32_Main_Clock_Frequency": "216_000_000",
         "STM32_HSE_Clock_Frequency": "25_000_000",
-        "STM32_FLASH_Latency": "5",
+        "STM32_FLASH_Latency": "7",
+        "PLLQ_Value": "9",
     },
     "stm32756geval": {
         "STM32_Main_Clock_Frequency": "180_000_000",
         "STM32_HSE_Clock_Frequency": "25_000_000",
         "STM32_FLASH_Latency": "5",
+        "PLLQ_Value": "7",
     },
     "stm32f769disco": {
         "STM32_Main_Clock_Frequency": "200_000_000",
         "STM32_HSE_Clock_Frequency": "25_000_000",
         "STM32_FLASH_Latency": "6",
+        "PLLQ_Value": "7",
     },
 }
 

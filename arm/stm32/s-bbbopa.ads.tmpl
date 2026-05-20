@@ -43,15 +43,12 @@ package System.BB.Board_Parameters is
    --------------------
 
    Main_Clock_Frequency : constant := "${STM32_Main_Clock_Frequency}";
-   --  Optimal frequency of the system clock. Note that the STM32F411 can go
-   --  up to 200 MHz, but all other STM32F40x and STM32F41x MCUs can only do
-   --  168 MHz.
 
    HSE_Clock_Frequency : constant := "${STM32_HSE_Clock_Frequency}";
    --  Frequency of High Speed External clock.
 
    FLASH_Latency : constant := "${STM32_FLASH_Latency}";
    PLLP_Value    : constant := 2;
-   PLLQ_Value    : constant := 7;
+   PLLQ_Value    : constant := "${PLLQ_Value}";
 
 end System.BB.Board_Parameters;
