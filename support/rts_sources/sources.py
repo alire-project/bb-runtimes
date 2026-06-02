@@ -2145,7 +2145,8 @@ sources = {
         "qnx_srcs": [
             "libgnarl/a-reatim.ads",
             "libgnarl/a-reatim.adb",
-            "hie/s-multip__raven-default.ads",
+            "libgnat/s-multip.ads",
+            "libgnat/s-multip.adb",
             "libgnarl/s-taspri__posix.ads",
             "hie/s-osinte__qnx-light-tasking.ads",
             "hie/s-osinte__qnx-light-tasking.adb",
