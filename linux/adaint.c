@@ -5,6 +5,10 @@
 #include <unistd.h>
 #include <sched.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void *
 __gnat_lwp_self (void)
 {
@@ -42,3 +46,14 @@ __gnat_cpu_set (int cpu, size_t count, cpu_set_t *set)
      CPU by a 0, so we need to adjust. */
   CPU_SET_S (cpu - 1, count, set);
 }
+
+int
+__gnat_number_of_cpus (void)
+{
+  int cores = (int) sysconf (_SC_NPROCESSORS_ONLN);
+  return cores;
+}
+
+#ifdef __cplusplus
+}
+#endif
