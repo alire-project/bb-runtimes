@@ -41,14 +41,15 @@ _start_ram:
 2:
 
 #define MSTATUS_FS          0x00006000
+#define MSTATUS_VS          0x00000600
 
-        /* Enable FPU */
-        li   a0, MSTATUS_FS  /* Set FPU bit */
-        csrs mstatus, a0     /* Move to mstatus register */
-        csrr a1, mstatus     /* Move from mstatus register */
-        and  a1, a1, a0      /* Check that the bit is actually set */
+        /* Enable FPU and Vector extensions */
+        li   a0, MSTATUS_FS | MSTATUS_VS  /* Set FPU and Vector bits */
+        csrs mstatus, a0                  /* Move to mstatus register */
+        csrr a1, mstatus                  /* Move from mstatus register */
+        and  a1, a1, a0                   /* Check that the bit is actually set */
         beqz a1, 1f
-        fssr x0              /* Set rounding mode */
+        fssr x0                           /* Set rounding mode */
 1:
 
         /* LLVM does not support C++ so we do not activate the code to
