@@ -54,7 +54,7 @@ class Spike(RiscV64):
         self.add_linker_script("riscv/spike/memory-map.ld")
         self.add_linker_script("riscv/spike/common-RAM.ld", loader="RAM")
         self.add_gnat_sources(
-            "riscv/start-ram.S",
+            "riscv/spike/start-ram.S",
             "riscv/src/riscv_host_target_interface.ads",
             "riscv/src/riscv_host_target_interface.adb",
             "src/s-macres__riscv-htif.adb",
